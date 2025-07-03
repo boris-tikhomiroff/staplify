@@ -1,0 +1,19 @@
+{
+  "name": "staplify",
+  "private": true,
+  "packageManager": "yarn@1.22.22",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "start": "concurrently \"serve -s apps/web/dist -p 3000\" \"node apps/api/dist/main.js\"",
+    "test": "turbo run test"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.4",
+    "concurrently": "^8.2.2"
+  }
+}
