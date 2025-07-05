@@ -1,61 +1,51 @@
 name: 🚀 Staplify CI/CD
 
-# 📋 DÉCLENCHEURS
 on:
   push:
-    branches: ['**'] # Toutes les branches
+    branches: ['**']
   pull_request:
-    branches: [main] # PR vers main
+    branches: [main]
 
 # 🔐 PERMISSIONS
 permissions:
-  contents: read # Lire le code
-  packages: write # Écrire dans GitHub Container Registry (pour deploy)
+  contents: read
+  packages: write
 
 jobs:
-  # ✅ JOB 1: Validation du code (TOUJOURS exécuté)
   validate:
     name: ✅ Validate Code
     runs-on: ubuntu-latest
 
     steps:
-      # 📥 ÉTAPE 1: Récupérer le code
       - name: 📥 Checkout code
         uses: actions/checkout@v4
 
-      # 📦 ÉTAPE 2: Setup Node.js + Yarn
       - name: 📦 Setup Node.js & Yarn
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'yarn'
 
-      # 📋 ÉTAPE 3: Installer les dépendances
       - name: 📋 Install dependencies
         run: yarn install --frozen-lockfile
 
-      # 🎨 ÉTAPE 4: Linter (vérifie le style de code)
       - name: 🎨 Lint code
         run: yarn lint
 
-      # 🔍 ÉTAPE 5: TypeScript check (vérifie les types)
       - name: 🔍 Type check
         run: yarn check-types
 
-      # 🧪 ÉTAPE 6: Tests (quand vous en aurez)
       - name: 🧪 Run tests
-        run: yarn test || echo "No tests configured yet"
+        run: yarn test
 
-      # 🏗️ ÉTAPE 7: Test build (seulement sur main - pas sur PR)
       - name: 🏗️ Test build
         if: github.ref == 'refs/heads/main'
         run: yarn build
 
-  # 🐳 JOB 2: Build Docker (SEULEMENT sur main)
   build:
     name: 🐳 Build Docker Image
     runs-on: ubuntu-latest
-    needs: validate # Attend que validate réussisse
+    needs: validate
     if: github.ref == 'refs/heads/main' # SEULEMENT branche main
 
     steps:
@@ -91,11 +81,10 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  # 🌐 JOB 3: Deploy to Production (SEULEMENT sur main)
   deploy:
     name: 🌐 Deploy to Production
     runs-on: ubuntu-latest
-    needs: [validate, build] # Attend validate ET build
+    needs: [validate, build]
     if: github.ref == 'refs/heads/main' # SEULEMENT branche main
 
     steps:

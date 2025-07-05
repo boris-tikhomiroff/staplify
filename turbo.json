@@ -13,6 +13,14 @@
       "dependsOn": ["^check-types"]
     },
     "lint": {},
-    "lint:fix": {}
+    "lint:fix": {},
+    "test": {
+      "outputs": ["coverage/**"],
+      "dependsOn": ["^build"]
+    },
+    "test:coverage": {
+      "outputs": ["coverage/**"],
+      "dependsOn": ["^build"]
+    }
   }
 }
