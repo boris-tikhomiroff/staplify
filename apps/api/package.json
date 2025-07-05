@@ -32,7 +32,7 @@
     "@staplify/eslint-config": "*",
     "@staplify/typescript-config": "*",
     "@swc/cli": "^0.6.0",
-    "@swc/core": "^1.10.7",
+    "@swc/core": "^1.12.9",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.10.7",
@@ -51,7 +51,8 @@
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.35.1"
+    "typescript-eslint": "^8.35.1",
+    "unplugin-swc": "^1.5.5"
   },
   "jest": {
     "moduleFileExtensions": [
