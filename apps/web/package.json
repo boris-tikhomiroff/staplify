@@ -8,7 +8,9 @@
     "build": "vite build",
     "check-types": "tsc --noEmit",
     "preview": "vite preview",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "start": "serve -s dist",
+    "start:prod": "serve -s dist"
   },
   "dependencies": {
     "react": "^19.1.0",
