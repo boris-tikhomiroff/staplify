@@ -1,0 +1,14 @@
+{
+  "extends": "@staplify/typescript-config/base.json",
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strict": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "noEmit": false,
+    "lib": ["DOM", "ES2023"]
+  },
+  "include": ["src/**/*.ts", "src/exports.js"],
+  "exclude": ["test/**/*", "dist/**/*", "node_modules/**/*"]
+}
